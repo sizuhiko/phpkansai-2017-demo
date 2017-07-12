@@ -8,5 +8,12 @@
             "email": "sizuhiko@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^6.2",
+        "consolidation/robo": "^1.1"
+    },
+    "scripts": {
+      "robo": "robo"
+    }
 }
