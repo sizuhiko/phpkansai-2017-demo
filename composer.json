@@ -1,0 +1,12 @@
+{
+    "name": "sizuhiko/phpkansai-2017-demo",
+    "description": "PHP conference kansai 2017 demo",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "sizuhiko",
+            "email": "sizuhiko@gmail.com"
+        }
+    ],
+    "require": {}
+}
