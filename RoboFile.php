@@ -6,6 +6,8 @@
  */
 class RoboFile extends \Robo\Tasks
 {
+  use \Sizuhiko\Phpkansai2017\Task\PrintTask\loadTasks;
+
   /**
    * PHPUnitのテストを実行するデモ
    *
@@ -56,5 +58,24 @@ class RoboFile extends \Robo\Tasks
   {
     $this->taskScss(['assets/main.scss' => 'public/main.css'])
       ->run();
+  }
+
+  /**
+   * カスタムタスクを使った呼び出しシーケンスを確認するデモ
+   *
+   * このコマンドは、PHPカンファレンス関西2017のRoboデモ用で、カスタムタスクを使ってタスクチェインしたときの流れを確認します。
+   */
+  function custom()
+  {
+    $collection = $this->collectionBuilder();
+    $collection->taskPrint('最初のタスク')
+        ->completion($this->taskPrint('最初のタスクが完了した'))
+      ->taskPrint('２番目のタスク')
+        ->reject()
+        ->completion($this->taskPrint('２番目のタスクが完了した'))
+      ->taskPrint('３番目のタスク')
+        ->completion($this->taskPrint('３番目のタスクが完了した'));
+
+    return $collection;
   }
 }

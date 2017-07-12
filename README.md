@@ -55,3 +55,27 @@ roboの標準タスクを使うとき、外部コンポーネントが必要に�
 エディタで `assets/main.scss` を修正すると、自動的にcssを生成します。
 ブラウザのリロードボタンをクリックしてみましょう。
 
+# カスタムタスクを使った呼び出しシーケンスの確認
+
+Roboでは独自にカスタムタスクを作れるようになっています。
+公式ドキュメントによると `composer.json` の type を `robo-tasks` にすることが推奨されていますが、
+`robo-phpcs` のように type が `library` のものも存在します。
+Packagist からユーザータスクを探すときは `robo` をキーワードにした方が良いでしょう。
+
+カスタムタスクは以下の条件を必要としています。
+
+- psr-4 の名前空間に対応したファイル配置（`composer.json` に書いておくと幸せになれる）
+- タスクのクラスと、それをロードするための trait
+
+具体的なテンプレート例は[公式ドキュメント](http://robo.li/extending/#creating-a-robo-extension)に掲載されています。
+
+`tasks` ディレクトリの下にタスクフォルダを作って、その下に trait のファイル名でタスクジェネレータを作るようにします。
+RoboFileからは、この trait を use して、taskXxx のようなメソッドを利用可能にします。
+
+複数のタスクをチェインして書く場合は `CollectionBuilder` を利用します。
+利用方法は `$collection = $this->collectionBuilder();` のように記述するだけです。
+あとは、普通のタスクを列挙するように `$collection` からチェインしていきます。
+シンプルな書き方と比べて異なるのは `run()` を呼び出さずに、`$collection` を戻り値に設定することです。
+
+このデモでは `custom` という composer script を追加したので、
+`composer custom` またANSIの色付け表示したい場合は `composer custom -- --ansi` のように実行します。
