@@ -37,3 +37,21 @@ composer script に test を追加して、`composer test` で実行できるよ
 - 成功テストの実行方法: `composer test`
 - 失敗テストの実行方法: `composer test -- --force-fail`
 - testコマンドのヘルプ: `composer robo -- help -- test`
+
+# 開発中の作業を楽にするタスク
+
+WebページのAssetファイルを編集したとき、都度ビルドするのはとても面倒です。
+ファイルが変更されたら、自動的にコンパイルするようなタスクを作ってみましょう。
+
+roboの標準タスクを使うとき、外部コンポーネントが必要になる場合があります。
+これらはインストールしていない状態で実行すると、親切なエラーが出るので、そのタイミングでインストールしても良いのですが、
+ドキュメントにも明示されているので、あらかじめ `composer require --dev` しておきましょう。
+
+- SCSSコンパイラ: "leafo/scssphp"
+- ファイル監視: "henrikbjorn/lurker"
+
+`composer.json` に start スクリプトを追加して、 `composer start` で起動できるようにします。
+コマンドを実行すると、PHPサーバーが起動し、ブラウザで表示します。
+エディタで `assets/main.scss` を修正すると、自動的にcssを生成します。
+ブラウザのリロードボタンをクリックしてみましょう。
+
